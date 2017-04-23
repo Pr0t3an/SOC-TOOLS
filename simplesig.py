@@ -37,6 +37,12 @@ print "------------------------------------"
 	
 # Request name for finished rule from user.
 ruleName = raw_input("#Please enter a name for rule with no spaces:")
+# adding nocase modifier to this
+nocase = raw_input ("\n Create with nocase modifier? (N): ")
+if nocase.lower() in ("y", "yes" "deadon", "sure", "yea", "si"):
+	yarmodifier = "nocase"
+else:
+	yarmodifier =""
 
 outFile = open("%s.yar" % ruleName, "w+")
 outFile.write("rule " + ruleName + "\n")
@@ -57,7 +63,7 @@ wcl = len(userKeys)
 # For loop writes the keywords from the text file to YARA strings
 # TO DO - this probably won't work out of the box - fix this
 for i in range (wcl):
-    outFile.write("        $" + str(i) + ' = "' + (userKeys[i]).strip('\n') + '"\n')
+    outFile.write("        $" + str(i) + ' = "' + (userKeys[i]).strip('\n') +  '" ' + yarmodifier +'\n')
 
 outFile.write("    condition: any of them\n")
 outFile.write("}\n")
